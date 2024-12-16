@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool closeStrings(string word1, string word2) {
+        if(word1.size()!=word2.size()){
+            return false;
+        }
+        vector<int>a(26,0);
+        vector<int>b(26,0);
+        for(int i=0;i<word1.size();i++){
+            a[word1[i]-'a']++;
+            b[word2[i]-'a']++;
+        }
+        int res=0;
+        vector<int>a1;
+        vector<int>b1;
+        for(int i=0;i<26;i++){
+            if((a[i]==0 and b[i]!=0) or (b[i]==0 and a[i]!=0)){
+                return false;
+            }
+            if(a[i]!=0){
+                a1.push_back(a[i]);
+            }
+            if(b[i]!=0){
+                b1.push_back(b[i]);
+            }
+        }
+        sort(begin(a1),end(a1));
+        sort(begin(b1),end(b1));
+        if(a1.size()!=b1.size()){
+            return false;
+        }
+        for(int i=0;i<a1.size();i++){
+            if(a1[i]!=b1[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+};
