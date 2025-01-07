@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>>ans;
+        unordered_map<string,vector<string>>umap;
+        for(int i=0;i<strs.size();i++){
+            vector<int>a(26,0);
+            string word=strs[i];
+            for(int j=0;j<word.size();j++){
+                 a[word[j]-'a']++;
+            }
+            string new_word="";
+            for(int k=0;k<26;k++){
+                 int t=a[k];
+                 while(t>0){
+                    new_word+=(k+'a');
+                    t--;
+                 }
+            }
+            umap[new_word].push_back(word);
+            
+        }
+        for(auto nbr:umap){
+            ans.push_back(nbr.second);
+        }
+
+        return ans;
+    }
+};
